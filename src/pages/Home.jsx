@@ -48,15 +48,16 @@ const Home = () => {
     .then((resp)=>{
       console.log(resp)
     })
+    window.location.reload()
   }
 
   return (
     <div className='flex w-full justify-center'>
-      <div className='flex w-1/3 flex-col mt-24 '>
+      <div className='flex w-3/4  sm:w-1/3 flex-col mt-24 '>
           <div className='flex justify-between row'>
             <h1 style={{ fontFamily: 'Montserrat' }} className='text-white font-bold'>Relogio de ponto</h1>
             <div className='flex flex-col'>
-              <p style={{ fontFamily: 'Montserrat' }} className='text-white font-bold'>#{userId}</p>
+              <p style={{ fontFamily: 'Montserrat' }} className='text-white font-bold'>#{window.localStorage.getItem('name').toLocaleUpperCase()}</p>
               <p style={{ fontFamily: 'Montserrat' }} className='text-white'>Usuário</p>
             </div>
           </div>
@@ -76,7 +77,8 @@ const Home = () => {
             </p>
             <div className='flex flex-col gap-2 mt-2'>
               {logs?.map((i,index)=>{
-                if(index % 2 !==0){
+                if(index >= 16){}
+                else {if(index % 2 !==0){
                 const data = i.data_hora?.match(/^\d{4}-\d{2}-\d{2}/)[0]
                 const formatData = `${data[8]}${data[9]}/${data[5]}${data[6]}/${data[2]}${data[3]}`
 
@@ -85,7 +87,7 @@ const Home = () => {
                             <p className='text-sm'>{formatData}</p>
                             <p className='text-sm font-bold'>{HandleTime(i.data_hora,logs[index-1]?.data_hora)}</p>
                          </div>
-                }}
+                }}}
               })}
             </div>
           </div>
